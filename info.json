@@ -7,7 +7,7 @@
   "description": "Adds power transformers for connecting power networks, for designating generators as priority or reserve power.",
   "factorio_version": "2.0",
   "dependencies": [
-    "base >= 2.0"
+    "base >= 2.0.7"
   ],
   "quality_required": false,
   "rail_bridges_required": false,
