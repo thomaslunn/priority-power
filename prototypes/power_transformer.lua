@@ -1,52 +1,94 @@
+local sounds = require("__base__.prototypes.entity.sounds")
+
 local graphics = require("graphics")
 
 local entity = {
-    type="boiler",
-    name="power-transformer",
-    flags = {"placeable-player", "player-creation"},
-    minable = { mining_time = 0.8, result = "power-transformer" },
-    placeable_by = {item = "power-transformer", count = 1},
+    type="constant-combinator",
+    name="pwrpty-power-transformer",
+    flags = {"placeable-player", "player-creation", "hide-alt-info"},
+    minable = { mining_time = 0.8, result = "pwrpty-power-transformer" },
+    placeable_by = {item = "pwrpty-power-transformer", count = 1},
     max_health = 300,
 
-    energy_source = {
-        type = "void"
+    activity_led_light_offsets = {{0, 0}, {0, 0}, {0, 0}, {0, 0}},
+    circuit_wire_connection_points = {
+        {wire = {}, shadow = {}},
+        {wire = {}, shadow = {}},
+        {wire = {}, shadow = {}},
+        {wire = {}, shadow = {}},
     },
-    energy_consumption = "1W",
-
-    fluid_box = {
-        volume = 1,
-        pipe_connections = {},
-        hide_connection_info = true
-    },
-    output_fluid_box = {
-        volume = 1,
-        pipe_connections = {},
-        hide_connection_info = true
-    },
-    burning_cooldown = 0,
 
     icon = "__priority-power__/graphics/icons/trafo.png",
     icon_size = 32,
-    pictures = graphics.transformer_pictures,
+    sprites = graphics.transformer_pictures,
 
     collision_box = {{-0.9, -1.9}, {0.9, 1.9}},
     collision_mask = {
         layers = {item = true, object = true, player = true, water_tile = true}
     },
     selection_box = {{-1, -2}, {1, 2}},
+
+    open_sound = sounds.electric_large_open,
+    close_sound = sounds.electric_large_close,
+
+    impact_category = "metal"
 }
+
 local item = {
     type = "item",
-    name = "power-transformer",
+    name = "pwrpty-power-transformer",
     
-    stack_size = 50,
+    stack_size = 10,
     icon = "__priority-power__/graphics/icons/trafo.png",
     icon_size = 32,
 
-    place_result = "power-transformer",
+    place_result = "pwrpty-power-transformer",
+
+    subgroup = "circuit-network",
+    order = "d[other]-c[power-transformer]"
+}
+
+local recipe = {
+    type = "recipe",
+    name = "pwrpty-power-transformer",
+
+    ingredients = {
+        {type = "item", name = "steel-plate", amount = 5},
+        {type = "item", name = "electronic-circuit", amount = 5},
+        {type = "item", name = "copper-cable", amount = 10},
+        {type = "item", name = "battery", amount = 2}
+    },
+    results = {
+        {type = "item", name = "pwrpty-power-transformer", amount = 1}
+    },
+
+    enabled = false,
+}
+
+local tech = {
+    type = "technology",
+    name = "pwrpty-power-transformer",
+    icon = "__priority-power__/graphics/technologies/tier-1.png",
+    icon_size = 128,
+
+    effects = {
+        {
+            type = "unlock-recipe",
+            recipe = "pwrpty-power-transformer"
+        }
+    },
+    unit = {
+        count = 100,
+        ingredients = {{"automation-science-pack", 1}, {"logistic-science-pack", 1}},
+        time = 30
+    },
+    
+    prerequisites = {"battery", "electric-energy-distribution-1"}
 }
 
 return {
     entity,
-    item
+    item,
+    recipe,
+    tech
 }
