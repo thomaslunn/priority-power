@@ -1,0 +1,7 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.0.0
+Date: 2025-05-04
+  Info:
+    - Add homepage link to info.json
+    - Change info.json in attempt to fix semantic-release-factorio
+    - Fix base version requirement in info.jsonn
