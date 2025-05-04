@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "title": "Priority Power",
     "author": "Bring2Light",
+    "homepage": "https://github.com/thomaslunn/priority-power/",
     "factorio_version": "2.0",
     "dependencies": ["base >= 2.0"],
     "description": "Adds power transformers for connecting power networks, for designating generators as priority or reserve power."
