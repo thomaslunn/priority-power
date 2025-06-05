@@ -5,5 +5,7 @@ end
 
 if mods["pyalternativeenergy"] then
     -- Recreate the dependency on batteries tech for PyAE, since it removes the battery technology
-    table.insert(data.raw.technology["pwrpty-power-transformer"].prerequisites, 1, "battery-mk01")
+    data.raw.technology["pwrpty-power-transformer"].prerequisites = {
+        "electric-energy-distribution-1", "battery-mk01"
+    }
 end
