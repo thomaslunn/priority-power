@@ -110,13 +110,15 @@ local function on_gui_selection_state_changed(event)
     if event.element.name ~= "pwrpty-input-priority-dropdown" and event.element.name ~= "pwrpty-output-priority-dropdown" then
         return
     end
-    
+
     gui.on_gui_selection_state_changed(event)
 
-    -- Rebuild hidden entities with new stats
     local affected_entity = gui.get_open_entity(event.player_index)
-    hidden_entities.destroy(affected_entity)
-    hidden_entities.create(affected_entity)
+    if affected_entity.name == "pwrpty-power-transformer" then
+        -- Rebuild hidden entities with new stats
+        hidden_entities.destroy(affected_entity)
+        hidden_entities.create(affected_entity)
+    end
 end
 
 -- init event
