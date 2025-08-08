@@ -86,6 +86,24 @@ local tech = {
     prerequisites = {"battery", "electric-energy-distribution-1"}
 }
 
+if mods["Ultracube"] then
+    require("__Ultracube__/prototypes/lib/tech_costs")
+
+    recipe.category = "cube-fabricator-handcraft"
+    recipe.ingredients = {
+        {type = "item", name = "cube-basic-matter-unit", amount = 40},
+        {type = "item", name = "cube-electronic-circuit", amount = 5},
+        {type = "item", name = "copper-cable", amount = 10},
+        {type = "item", name = "battery", amount = 2}
+    }
+
+    tech.prerequisites = {
+        "cube-battery",
+        "cube-electric-energy-distribution-1"
+    }
+    tech.unit = tech_cost_unit("1b", 100)
+end
+
 return {
     entity,
     item,
