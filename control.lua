@@ -89,9 +89,6 @@ local function on_settings_pasted(event)
 
     if event.destination.name == "entity-ghost" and event.destination.ghost_name == "pwrpty-power-transformer" then
         transformer_settings.validate_settings_after_paste(event.destination)
-        
-        hidden_entities.destroy(event.destination)
-        hidden_entities.create(event.destination)
 
         gui.check_for_settings_changed_with_gui_open(event.destination)
     end
